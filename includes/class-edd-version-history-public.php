@@ -35,9 +35,10 @@ class EDD_Version_History_Public {
 	public function edd_version_history_shortcode( $args ) {
 
 		$defaults = array(
-			'download_id'     => false,
-			'include_current' => false,
-			'limit'           => 10,
+			'download_id'          => false,
+			'include_current'      => false,
+			'limit'                => 10,
+			'download_purchase_id' => false,
 		);
 
 		$args = wp_parse_args( $args, $defaults );
@@ -52,7 +53,7 @@ class EDD_Version_History_Public {
 			$orders = edd_get_orders(
 				array(
 					'customer_id'    => $customer->id,
-					'product_id'     => $args['download_id'],
+					'product_id'     => false !== $args['download_purchase_id'] ? $args['download_purchase_id'] : $args['download_id'],
 					'number'         => 20,
 					'type'           => 'sale',
 					'status__not_in' => array( 'trash', 'refunded', 'abandoned' ),
@@ -67,6 +68,10 @@ class EDD_Version_History_Public {
 		}
 
 		$files = edd_get_download_files( $args['download_id'] );
+
+		if ( ! $files )  {
+			return '';
+		}
 
 		$version_history = '';
 
@@ -136,12 +141,14 @@ class EDD_Version_History_Public {
 	 */
 	public function process_download_args( $args ) {
 
-		$file = sanitize_text_field( $_GET['file'] );
+		if ( isset( $_GET['file'] ) ) {
+			$file = sanitize_text_field( $_GET['file'] );
 
-		if ( strpos( $file, ':' ) ) {
-			$file            = explode( ':', $file );
-			$args['file']    = intval( $file[0] );
-			$args['version'] = $file[1];
+			if ( strpos( $file, ':' ) ) {
+				$file            = explode( ':', $file );
+				$args['file']    = intval( $file[0] );
+				$args['version'] = $file[1];
+			}
 		}
 
 		return $args;
@@ -158,7 +165,7 @@ class EDD_Version_History_Public {
 	 * @param array  $args           The download args.
 	 * @return string The requested file.
 	 */
-	public function requested_file( $requested_file, $download_files, $file_key, $args ) {
+	public function requested_file( $requested_file, $download_files, $file_key, $args = array() ) {
 
 		if ( ! isset( $args['version'] ) ) {
 			return $requested_file;

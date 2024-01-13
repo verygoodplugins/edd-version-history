@@ -20,6 +20,7 @@ The shortcode is `[edd_version_history]`. It accepts the following parameters:
 * `download_id`: (required) The download ID
 * `limit`: The number of tags to show (default `10`)
 * `include_current`: Whether or not to include the current plugin version in the list. Default `false`
+* `download_purchase_id`: By default we check to see if the customer has purchased the `download_id`, you can override that here (for example in case of addons or bundles)
 
 ## Changelog
 
