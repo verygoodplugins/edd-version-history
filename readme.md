@@ -22,6 +22,10 @@ The shortcode is `[edd_version_history]`. It accepts the following parameters:
 * `include_current`: Whether or not to include the current plugin version in the list. Default `false`
 * `download_purchase_id`: By default we check to see if the customer has purchased the `download_id`, you can override that here (for example in case of addons or bundles)
 
+## Wish List
+
+- [ ] Display the file dates alongside the version numbers
+
 ## Changelog
 
 ### 1.0.0 on January 13th, 2024
