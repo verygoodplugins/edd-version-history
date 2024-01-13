@@ -4,6 +4,9 @@ This is an [Easy Digital Downloads](https://wpfusion.com/go/easy-digital-downloa
 
 It requires the [EDD Git Download Updater](https://easydigitaldownloads.com/downloads/git-download-updater/?ref=4978) plugin.
 
+<img width="1144" alt="image" src="https://github.com/verygoodplugins/edd-version-history/assets/13076544/d5585ac7-4644-490c-a6d3-39bdb536cc4d">
+
+
 ## How it works
 
 * When a version download link is clicked, the plugin will first check your EDD uploads folder to see if a matching file already exists
