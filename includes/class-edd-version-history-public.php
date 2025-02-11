@@ -117,7 +117,7 @@ class EDD_Version_History_Public {
 
 				$url = edd_get_download_file_url( $orders[0], edd_get_payment_user_email( $orders[0] ), $key . ':' . $tag, $args['download_id'] );
 
-				$version_history .= '<li><a href="' . esc_url( $url ) . '">' . $tag . '</a></li>';
+				$version_history .= '<li><a href="' . esc_url( $url ) . '">' . esc_html( $tag ) . '</a></li>';
 
 			}
 
